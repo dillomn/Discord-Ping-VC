@@ -12,10 +12,13 @@ bot.on("ready", async () => {
 
 
 bot.on('voiceStateUpdate', (oldState, newState ) => {
+    let myRole = newState.member.guild.roles.cache.find(role => role.name === "vc");
     if (oldState.channel === null && newState.channel !== null) {
         console.log("A user just joined vc !")
+        newState.member.roles.add(myRole)
     } else {
-        console.log("A user just left the vc !")   
+        console.log("A user just left the vc !")
+        newState.member.roles.remove(myRole)   
     }
 });
 
