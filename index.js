@@ -11,21 +11,14 @@ bot.on("ready", async () => {
     bot.user.setActivity(`Testing testing testing`);
 });
 
-bot.on('voiceStateUpdate', (oldMember, newMember) => {
-    let newUserChannel = newMember.voiceChannel
-    let oldUserChannel = oldMember.voiceChannel
+bot.on('voiceStateUpdate', (oldState, newState) => {
   
-  
-    if(oldUserChannel === undefined && newUserChannel !== undefined) {
-  
-       // User Joins a voice channel
-       console.log("A user just joined vc !")
-  
-    } else if(newUserChannel === undefined){
-  
-      // User leaves a voice channel
-      console.log("A user just left vc !")
+    if (oldState.channel === null && newState.channel !== null) {
+        console.log("A user just joined vc !")
+    } else {
+        console.log("A user just left the vc !")
     }
-  })
+});
+
 
 bot.login(botconfig.token);
