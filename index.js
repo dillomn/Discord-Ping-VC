@@ -4,19 +4,18 @@ const botconfig = require("./config.json");
 const fs = require("fs");
 bot.commands = new Discord.Collection();
 
-
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`)
     bot.user.setStatus('idle')
     bot.user.setActivity(`Testing testing testing`);
 });
 
-bot.on('voiceStateUpdate', (oldState, newState) => {
-  
+
+bot.on('voiceStateUpdate', (oldState, newState ) => {
     if (oldState.channel === null && newState.channel !== null) {
         console.log("A user just joined vc !")
     } else {
-        console.log("A user just left the vc !")
+        console.log("A user just left the vc !")   
     }
 });
 
