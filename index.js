@@ -13,6 +13,17 @@ bot.on("ready", async () => {
 
 bot.on('voiceStateUpdate', (oldState, newState ) => {
     let myRole = newState.member.guild.roles.cache.find(role => role.name === "vc");
+    if (!myRole) {
+        newState.guild.roles.create({
+            data: {
+              name: 'vc',
+              color: 'BLUE',
+            },
+            reason: 'The role for vc doesnt exist',
+          })
+            .then(console.log)
+            .catch(console.error);
+    }
     if (oldState.channel === null && newState.channel !== null) {
         console.log("A user just joined vc !")
         newState.member.roles.add(myRole)
