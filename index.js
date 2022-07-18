@@ -6,10 +6,13 @@ bot.commands = new Discord.Collection();
 
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online!`)
-    bot.user.setStatus('idle')
-    bot.user.setActivity(`Testing testing testing`);
-});
-
+    bot.user.setPresence({
+        status: 'idle',
+        activity: {
+            name: 'Sleepy...',
+        }
+    })
+})
 
 bot.on('voiceStateUpdate', (oldState, newState ) => {
     let myRole = newState.member.guild.roles.cache.find(role => role.name === "vc");
