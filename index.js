@@ -15,9 +15,8 @@ bot.on("ready", async () => {
 })
 
 bot.on('voiceStateUpdate', async (oldState, newState) => {
-    let vcRole = newState.member.guild.roles.cache.find(role => role.name === "vc");
-
-    if (!vcRole) {
+    let vcRole = newState.member.guild.roles.cache.find(role => role.name === "vc"); // Assigns vc role to vcRole the role should either equal the vc role or "undefined"
+    if (!vcRole) { // If the vcRole is undefiened it will run the following to create the role
         vcRole = await newState.guild.roles.create({
             data: {
               name: 'vc',
@@ -26,10 +25,10 @@ bot.on('voiceStateUpdate', async (oldState, newState) => {
             reason: 'The role for vc doesnt exist',
           });
     }
-    if (oldState.channel === null && newState.channel !== null) { 
+    if (oldState.channel === null && newState.channel !== null) {  // Checks if a user has joined then assigns them the vc role
         console.log("A user just joined vc !")
         await newState.member.roles.add(vcRole)
-    } else {
+    } else { // Checks if a user has left then removes their role
         console.log("A user just left the vc !")
         await newState.member.roles.remove(vcRole)   
     }
